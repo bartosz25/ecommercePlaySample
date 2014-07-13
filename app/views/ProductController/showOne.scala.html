@@ -1,0 +1,8 @@
+@(product: models.Product)
+
+@main("Virtual shop - the best e-commerce place") { 
+	<h1>@product.getName()</h1>
+	<div>@product.getDescription()</div>
+	<p>Price: @product.getPrice()</p>
+	<p>Others <a href="@routes.CategoryController.showOne(id=product.getCategory().getId(), page=1)">@product.getCategory().getName() products</a></p>
+}

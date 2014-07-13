@@ -1,3 +1,13 @@
+@import bindables.Page;
+@import tools.views.CategoryHelper;
+
 <ul>
-	<li><a href="@routes.User.register">Register</a></li>
+	<li><a href="@routes.UserController.register">Register</a></li>
+	<li>Categories
+		<ul>
+		@for(category <- CategoryHelper.getCategories()){
+			<li><a href="@routes.CategoryController.showOne(id=category.getId(), page=1)">@category.getName()</a></li>
+		}
+		</ul>
+	</li>
 </ul>

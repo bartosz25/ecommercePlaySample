@@ -3,10 +3,19 @@
 # ~~~~
 
 # Home page
-GET     /                           controllers.Application.index()
+GET     /                           controllers.ApplicationController.index()
 
 # User rotures
-GET		/register					controllers.User.register()
+GET		/register					controllers.UserController.register()
+
+# Categories routes
+# TODO : rewrite this route with bindable types, as follow
+# GET     /categories/:id             controllers.CategoryController.showOne(id: bindables.CategoryParam)
+GET		/categories/:id/:page		controllers.CategoryController.showOne(id: Integer, page: Integer)
+
+# Products routes
+GET 	/categories/:categoryId/products/$productName<[a-z0-9\-]+>_:id	controllers.ProductController.showOne(categoryId: Integer, productName, id: Integer)
+
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

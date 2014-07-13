@@ -1,6 +1,51 @@
-2014-07-05 21:33:24,319 - [INFO] - from play in pool-4-thread-4 
+2014-07-13 08:20:18,455 - [INFO] - from play in pool-4-thread-4 
 Listening for HTTP on /0:0:0:0:0:0:0:0:9000
 
-2014-07-05 21:33:46,351 - [INFO] - from play in play-internal-execution-context-1 
+2014-07-13 08:22:15,130 - [INFO] - from play in play-internal-execution-context-1 
+datasource [mysql://root:root@localhost/play_store] bound to JNDI as DefaultDS
+
+2014-07-13 08:22:15,590 - [INFO] - from play in play-internal-execution-context-1 
+database [default] connected at jdbc:mysql://localhost/play_store?useUnicode=yes&characterEncoding=UTF-8&connectionCollation=utf8_general_ci
+
+2014-07-13 08:22:17,956 - [INFO] - from play in play-internal-execution-context-1 
 Application started (Dev)
+
+2014-07-13 08:22:18,897 - [DEBUG] - from application in play-akka.actor.default-dispatcher-2 
+Found category: Category {id: 1, name: food}
+
+2014-07-13 08:22:19,125 - [DEBUG] - from application in play-akka.actor.default-dispatcher-2 
+Found products: [Product {id: 1, name: bread, category: Category {id: 1, name: food}, price: 1.99}, Product {id: 2, name: butter, category: Category {id: 1, name: food}, price: 5.99}]
+
+2014-07-13 08:22:26,237 - [DEBUG] - from application in play-akka.actor.default-dispatcher-3 
+Received category: 1, name: qsd-qs11-2-3-bread and id: 1
+
+2014-07-13 08:22:27,736 - [DEBUG] - from application in play-akka.actor.default-dispatcher-3 
+Found category: Category {id: 2, name: drinks}
+
+2014-07-13 08:22:27,743 - [DEBUG] - from application in play-akka.actor.default-dispatcher-3 
+Found products: [Product {id: 1, name: bread, category: Category {id: 1, name: food}, price: 1.99}, Product {id: 2, name: butter, category: Category {id: 1, name: food}, price: 5.99}]
+
+2014-07-13 08:22:28,887 - [DEBUG] - from application in play-akka.actor.default-dispatcher-2 
+Found category: Category {id: 1, name: food}
+
+2014-07-13 08:22:28,891 - [DEBUG] - from application in play-akka.actor.default-dispatcher-2 
+Found products: [Product {id: 1, name: bread, category: Category {id: 1, name: food}, price: 1.99}, Product {id: 2, name: butter, category: Category {id: 1, name: food}, price: 5.99}]
+
+2014-07-13 08:22:29,623 - [DEBUG] - from application in play-akka.actor.default-dispatcher-2 
+Found category: Category {id: 4, name: pasta}
+
+2014-07-13 08:22:29,631 - [DEBUG] - from application in play-akka.actor.default-dispatcher-2 
+Found products: [Product {id: 1, name: bread, category: Category {id: 1, name: food}, price: 1.99}, Product {id: 2, name: butter, category: Category {id: 1, name: food}, price: 5.99}]
+
+2014-07-13 08:22:30,624 - [DEBUG] - from application in play-akka.actor.default-dispatcher-10 
+Received category: 4, name: qsd-qs11-2-3-butter and id: 2
+
+2014-07-13 08:22:31,717 - [DEBUG] - from application in play-akka.actor.default-dispatcher-10 
+Found category: Category {id: 1, name: food}
+
+2014-07-13 08:22:31,724 - [DEBUG] - from application in play-akka.actor.default-dispatcher-10 
+Found products: [Product {id: 1, name: bread, category: Category {id: 1, name: food}, price: 1.99}, Product {id: 2, name: butter, category: Category {id: 1, name: food}, price: 5.99}]
+
+2014-07-13 08:22:33,263 - [DEBUG] - from application in play-akka.actor.default-dispatcher-10 
+Received category: 1, name: qsd-qs11-2-3-bread and id: 1
 

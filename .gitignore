@@ -32,3 +32,6 @@ local.properties
 
 # target repository
 target/
+
+# Gedit files
+*~
