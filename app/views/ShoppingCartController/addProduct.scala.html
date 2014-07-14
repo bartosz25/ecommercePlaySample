@@ -1,0 +1,12 @@
+@import tools.web.UrlNormalizer;
+@(added: java.lang.Boolean, product: models.Product)
+
+@main("Virtual shop - the best e-commerce place") {
+	@if(added){
+		<p>Product was correctly added into your cart.</p>
+	}else{
+		<p>Product wasn't correctly added into your cart.</p>
+	}
+	<p>back to <a href="@routes.ProductController.showOne(product.getCategory().getId(), UrlNormalizer.normalizeToUrl(product.getName()), product.getId())">@product.getName() page</a></p>
+	<p>consult your <a href="">shopping cart</a></p>
+}

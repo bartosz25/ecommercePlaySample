@@ -7,7 +7,7 @@
 	<ul>
 		@for(product <- products){
 		<li>
-			<a href="@routes.ProductController.showOne(category.getId(), UrlNormalizer.normalizeToUrl("à ç _qsd qsààà 11 2 3 "+product.getName()), product.getId())">@product.getName()</a>
+			<a href="@routes.ProductController.showOne(category.getId(), UrlNormalizer.normalizeToUrl(product.getName()), product.getId())">@product.getName()</a>
 		</li>
 		}
 	</ul>

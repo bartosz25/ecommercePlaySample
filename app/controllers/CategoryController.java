@@ -5,11 +5,8 @@ import java.util.List;
 import models.Category;
 import models.Product;
 
-import bindables.Page;
-
 import play.db.jpa.Transactional;
 import play.*;
-import play.libs.F;
 import play.mvc.*;
 import services.CategoryService;
 import services.ProductService;
@@ -24,10 +21,10 @@ public class CategoryController extends Controller {
     	ProductService productService = (ProductService) ServicesInstances.PRODUCT_SERVICE.getService();
     	Category category = categoryService.getById(categoryId);
     	Logger.debug("Found category: "+category);
-    	
-    	List<Product> products = productService.getAll(new Pager(page, 
+    	List<Product> products = productService.getByCategory(categoryId, new Pager(page, 
     			Play.application().configuration().getInt("pager.perPage")));
     	Logger.debug("Found products: "+products);
+    	// TODO : add pagination to view
     	return ok(views.html.CategoryController.showOne.render(category, products));
 	}
 

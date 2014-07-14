@@ -1,8 +1,16 @@
-@(product: models.Product)
+@(product: models.Product, addedToCart: java.lang.String)
 
-@main("Virtual shop - the best e-commerce place") { 
+@main("Virtual shop - the best e-commerce place") {
+	@if(addedToCart != null){
+		@if(addedToCart.equals("true")){
+			<p><em>Product was correctly added to your cart.</em></p>
+		}else{
+			<p></em>Product wasn't correctly added to your cart.</em></p>
+		}
+	}
 	<h1>@product.getName()</h1>
 	<div>@product.getDescription()</div>
 	<p>Price: @product.getPrice()</p>
 	<p>Others <a href="@routes.CategoryController.showOne(id=product.getCategory().getId(), page=1)">@product.getCategory().getName() products</a></p>
+	<a href="@routes.ShoppingCartController.addProduct(productId=product.getId())">add to cart</a>
 }

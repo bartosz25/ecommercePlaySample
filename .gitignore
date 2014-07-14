@@ -32,6 +32,7 @@ local.properties
 
 # target repository
 target/
+logs/
 
 # Gedit files
 *~

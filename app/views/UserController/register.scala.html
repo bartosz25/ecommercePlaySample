@@ -1,6 +1,14 @@
-@(message: String)
+@(userForm: play.data.Form[User])
 
+TODO => customize fields presentation
 
 @main("Welcome to register page") { 
-	form registration => @message <=
+	@helper.form(action = routes.UserController.registerSubmit()) {
+    	@helper.inputText(userForm("login"))
+    	@helper.inputPassword(userForm("password"))
+    	
+    	TODO => transform birthday field to select 3 selects
+    	@helper.inputText(userForm("birthday"))
+    	<input type="submit" name="register" value="register" />
+	}
 }

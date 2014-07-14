@@ -13,9 +13,14 @@ public class ProductController extends Controller {
 	@Transactional(readOnly = true)
 	public static Result showOne(int categoryId, String name, int productId) {
 		Logger.debug("Received category: "+categoryId+", name: "+name+" and id: "+productId);
-    	ProductService productService = (ProductService) ServicesInstances.PRODUCT_SERVICE.getService();
-    	Product product = productService.getById(productId);
-    	return ok(views.html.ProductController.showOne.render(product));
+		try {
+	    	ProductService productService = (ProductService) ServicesInstances.PRODUCT_SERVICE.getService();
+	    	Product product = productService.getById(productId);
+	    	return ok(views.html.ProductController.showOne.render(product, flash("productAdded")));
+		} catch (Exception e) {
+			Logger.error("Error on showing product (id:"+productId+")", e);
+		}
+		return notFound();
 	}
 	
 }
