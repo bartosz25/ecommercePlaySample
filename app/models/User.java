@@ -10,6 +10,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal; 
+import javax.persistence.Transient;
+
+import annotations.Birthday;
 
 import constraints.BeforeDate;
 import constraints.validators.BeforeDateValidator;
@@ -34,13 +37,13 @@ public class User {
 
 	// TODO : move all hard-coded messages into .properties file as in Spring
     @Required(message = "Login is mandatory field")
+    @MinLength(value = 5, message = "Login must be at least 5-characters text")
     @MaxLength(value = 10, message = "Login can be 10-characters max length")
     @Pattern(value = "[a-z0-9\\-]+", message = "Only alphanumerical lower case characters and - are allowed in this field.")
 	private String login;
     @Required(message = "Password is mandatory field")
-    @MinLength(value = 10, message = "Password must be at least 10-characters length")
 	private String password;
-    @BeforeDate(dateToCompare = BeforeDateValidator.NOW, message = "Register date can't be in the past")
+    @BeforeDate(dateToCompare = BeforeDateValidator.NOW, message = "Register date can't be in the future")
 	private Date birthday;
     private Date createdTime;
 
@@ -85,8 +88,13 @@ public class User {
 	}
 	@Temporal(DATE)
 	@Column(name="birthday")
+	@Birthday
 	public Date getBirthday() {
 		return this.birthday;
+	}
+	@Transient
+	public String getSalt() {
+		return String.valueOf(this.login.charAt(4))+this.birthday.getTime()+String.valueOf(this.login.charAt(0));
 	}
 	
 	public void setId(int id) {

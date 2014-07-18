@@ -1,12 +1,16 @@
 package controllers;
 
+import java.text.ParseException;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import models.User;
 import play.*;
 import play.data.Form;
+import play.data.format.Formatters;
+import play.data.format.Formatters.SimpleFormatter;
 import play.mvc.*;
 import play.db.jpa.Transactional;
 import services.ServicesInstances;
@@ -42,10 +46,13 @@ public class UserController extends Controller {
     	if (!submittedForm.hasErrors()) {
         	User user = submittedForm.get();
         	UserService userService = (UserService) ServicesInstances.USER_SERVICE.getService();
-        	userService.addNewUser(user);
+        	boolean added = userService.addNewUser(user);
+        	if (added) {
+        		// TODO : redirect to success page
+        	} else {
+        		// TODO : pass error message to the template
+        	}
         	Logger.debug("Found user :"+user);
-    	} else {
-    		
     	}
     	return ok(register.render(submittedForm));
 //    	return redirect(controllers.routes.UserController.register());
