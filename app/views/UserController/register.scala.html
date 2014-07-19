@@ -1,12 +1,13 @@
 @(userForm: play.data.Form[User])
+@import helper._
 
-TODO => customize fields presentation
+@implicitField = @{FieldConstructor(helpers.form.inputFieldHelper.render)}
 
 @main("Welcome to register page") { 
 	@helper.form(action = routes.UserController.registerSubmit()) {
-    	@helper.inputText(userForm("login"))
-    	@helper.inputPassword(userForm("password"))
-    	@helper.inputText(userForm("birthday"))
+    	@helper.inputText(userForm("login"), '_label -> "Login", 'id -> "userLogin", 'fieldImportancy -> "VERY-HIGH", 'size -> 10)
+    	@helper.inputPassword(userForm("password"), '_label -> "Password")
+    	@helper.inputText(userForm("birthday"), '_label -> "Birthday")
     	<input type="submit" name="register" value="register" />
 	}
 }

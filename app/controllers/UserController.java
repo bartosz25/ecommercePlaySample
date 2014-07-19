@@ -36,8 +36,7 @@ public class UserController extends Controller {
 
 	@Transactional()
     public static Result registerSubmit() {
-		// TODO : register formatter for java.util.Date and try to make register validator works with new birthday field
-    	Form<User> submittedForm = userForm.bindFromRequest();
+    	Form<User> submittedForm = userForm.bindFromRequest("login", "password", "birthday");
     	Logger.debug("Data is :"+submittedForm.data());
     	Logger.debug("User errors :"+submittedForm.errors());
     	Logger.debug("User global errors :"+submittedForm.globalErrors());
@@ -45,6 +44,7 @@ public class UserController extends Controller {
     	Logger.debug("User hasErrors :"+submittedForm.hasErrors());
     	if (!submittedForm.hasErrors()) {
         	User user = submittedForm.get();
+        	Logger.debug("User from form is:"+user);
         	UserService userService = (UserService) ServicesInstances.USER_SERVICE.getService();
         	boolean added = userService.addNewUser(user);
         	if (added) {
@@ -55,6 +55,5 @@ public class UserController extends Controller {
         	Logger.debug("Found user :"+user);
     	}
     	return ok(register.render(submittedForm));
-//    	return redirect(controllers.routes.UserController.register());
     }
 }

@@ -102,7 +102,7 @@ public class ShoppingCart {
 	}
 
 	public static String generateAccessKey() {
-		// TODO : change on dynamic generation mechanism
+		// TODO : change on dynamic generation mechanism - it's static here only for learning purposes !
 		return "AFDDFSDFD3";
 	}
 	

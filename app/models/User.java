@@ -46,6 +46,7 @@ public class User {
     @BeforeDate(dateToCompare = BeforeDateValidator.NOW, message = "Register date can't be in the future")
 	private Date birthday;
     private Date createdTime;
+    private int major;
 
 	/**
 	 * This is a ad-hoc validation method, invoked only when the "basic" validation (ie. annotation-based) hasn't errors.
@@ -92,6 +93,10 @@ public class User {
 	public Date getBirthday() {
 		return this.birthday;
 	}
+	@Column(name="major")
+	public int getMajor() {
+		return this.major;
+	}
 	@Transient
 	public String getSalt() {
 		return String.valueOf(this.login.charAt(4))+this.birthday.getTime()+String.valueOf(this.login.charAt(0));
@@ -112,10 +117,18 @@ public class User {
 	public void setBirthday(Date birthday) {
 		this.birthday = birthday;
 	}
+	public void setMajor(int major) {
+		this.major = major;
+	}
+	
+	@Transient
+	public boolean isMajor() {
+		return this.major == 1;
+	}
 
 	@Override
 	public String toString() {
-		return "User {id: "+this.id+", login: "+this.login+"}";
+		return "User {id: "+this.id+", login: "+this.login+", is major: "+this.isMajor()+"}";
 	}
 	
 }
