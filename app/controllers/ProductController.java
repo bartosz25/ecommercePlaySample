@@ -23,4 +23,16 @@ public class ProductController extends Controller {
 		return notFound();
 	}
 	
+	@Transactional
+	public static Result productUnavailable(int id) {
+		try {
+	    	ProductService productService = (ProductService) ServicesInstances.PRODUCT_SERVICE.getService();
+	    	Product product = productService.getById(id);
+	    	return ok(views.html.ProductController.productUnavailable.render(product));
+		} catch (Exception e) {
+			Logger.error("Error on showing product (id:"+id+")", e);
+		}
+		return notFound();		
+	}
+	
 }

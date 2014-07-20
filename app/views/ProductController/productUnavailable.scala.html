@@ -1,0 +1,8 @@
+@(product: models.Product)
+@import tools.web.UrlNormalizer;
+
+
+@main("Product error") { 
+	<p>Product @product.getName() is not available for the buy.</p>
+	<a href="@routes.ProductController.showOne(product.getCategory().getId(), UrlNormalizer.normalizeToUrl(product.getName()), product.getId())">< go back to @product.getName() page</a>
+}

@@ -34,6 +34,7 @@ public class ShoppingCartService {
 		} else {
 			cart.addProduct(product);
 		}
+		Logger.debug("Before saving cart "+cart);
 		boolean saved = saveCart(cart);
 		if (saved && !session.containsKey(ShoppingCart.SESSION_ID_KEY)) {
 			session.put(ShoppingCart.SESSION_ID_KEY, String.valueOf(cart.getId()));

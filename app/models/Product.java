@@ -11,17 +11,22 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
 @Table(name="products")
 public class Product {
 
+	public static final int IN_STOCK = 1;
+	
 	private int id;
 	private Category category;
 	private String name;
 	private String description;
 	private double price;
+	private int inStock;
 	private List<ShoppingCartProduct> shoppingCartProducts;
 
     @Id
@@ -48,6 +53,10 @@ public class Product {
 	public double getPrice() {
 		return price;
 	}
+	@Column(name="in_stock")
+	public int getInStock() {
+		return this.inStock;
+	}
 	@OneToMany(mappedBy = "product")
 	public List<ShoppingCartProduct> getShoppingCartProducts() {
 		return this.shoppingCartProducts;
@@ -68,13 +77,21 @@ public class Product {
 	public void setPrice(double price) {
 		this.price = price;
 	}
+	public void setInStock(int inStock) {
+		this.inStock = inStock;
+	}
 	public void setShoppingCartProducts(List<ShoppingCartProduct> shoppingCartProducts) {
 		this.shoppingCartProducts = shoppingCartProducts;
 	}
 	
+	@Transient
+	public boolean isInStock() {
+		return this.inStock == IN_STOCK;
+	}
+	
 	@Override
 	public String toString() {
-		return "Product {id: "+this.id+", name: "+this.name+", category: "+this.category+", price: "+this.price+"}";
+		return "Product {id: "+this.id+", name: "+this.name+", category: "+this.category+", price: "+this.price+", in stock: "+isInStock()+"}";
 	}
 	
 }

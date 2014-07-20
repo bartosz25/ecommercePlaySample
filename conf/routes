@@ -20,6 +20,7 @@ GET		/categories/:id/:page		controllers.CategoryController.showOne(id: Integer, 
 
 # Products routes
 GET 	/categories/:categoryId/products/$productName<[a-z0-9\-]+>_:id	controllers.ProductController.showOne(categoryId: Integer, productName, id: Integer)
+GET		/product-out-of-stock/:id										controllers.ProductController.productUnavailable(id: Integer)
 
 # Shopping cart routes
 # TODO : replace productId by PathBindable type to avoid manual Int => Product instance conversion in the controller

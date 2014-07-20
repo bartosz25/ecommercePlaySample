@@ -11,10 +11,13 @@ import services.ProductService;
 import services.ServicesInstances;
 import services.ShoppingCartService;
 import tools.web.UrlNormalizer;
+import actions.OutOfStockAction;;
+
 
 public class ShoppingCartController extends Controller {
 	
 	@Transactional
+	@With({OutOfStockAction.class})
 	public static Result addProduct(int productId) {
 		ProductService productService = (ProductService) ServicesInstances.PRODUCT_SERVICE.getService();
 		ShoppingCartService shoppingCartService = (ShoppingCartService) ServicesInstances.SHOPPING_CART_SERVICE.getService();

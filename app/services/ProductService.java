@@ -2,9 +2,11 @@ package services;
 
 import java.util.List;
 
+import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import exception.ProductNotFoundException;
+import play.Logger;
 import play.db.jpa.JPA;
 import models.Product;
 import tools.web.Pager;
@@ -28,6 +30,7 @@ public class ProductService {
 		if (product == null) {
 			throw new ProductNotFoundException("Product was not found with given id ("+productId+")");
 		}
+		Logger.debug("Product from ProductService is "+product);
 		return product;
 	}
 
@@ -40,4 +43,13 @@ public class ProductService {
 		}
 		return query.getResultList();
 	}
+	
+	public boolean isInStock(int productId) {
+		Query query = JPA.em().createQuery("SELECT p FROM Product p WHERE p.id = :productId AND p.inStock = :inStock");
+		query.setParameter("productId", productId);
+		query.setParameter("inStock", Product.IN_STOCK);
+		Product product = (Product) query.getSingleResult();
+		return product != null;
+	}
+	
 }
