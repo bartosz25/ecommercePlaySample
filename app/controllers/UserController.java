@@ -7,12 +7,15 @@ import java.util.Locale;
 import java.util.Map;
 
 import models.User;
+import models.forms.LoginForm;
 import play.*;
 import play.data.Form;
 import play.data.format.Formatters;
 import play.data.format.Formatters.SimpleFormatter;
 import play.mvc.*;
 import play.db.jpa.Transactional;
+import security.FingerprintMaker;
+import security.StoreSecured;
 import services.ServicesInstances;
 import services.UserService;
 
@@ -28,6 +31,7 @@ public class UserController extends Controller {
 	 * handled by submit method (registerSubmit) with userForm.bindFromRequest().
 	 */
 	private static Form<User> userForm = Form.form(User.class);
+	private static Form<LoginForm> loginForm = Form.form(LoginForm.class);
 	
 	@Transactional(readOnly=true)
     public static Result register() {
@@ -56,4 +60,42 @@ public class UserController extends Controller {
     	}
     	return ok(register.render(submittedForm));
     }
+	
+	@Transactional
+	public static Result login() {
+		return ok(login.render(loginForm, flash()));
+	}
+	
+	@Transactional
+	public static Result loginSubmit() {
+		Form<LoginForm> submittedForm = loginForm.bindFromRequest("login", "password");
+		if (!submittedForm.hasErrors()) {
+			String fingerprint = null;
+			try {
+				fingerprint = FingerprintMaker.makeFromRequest(request(), Play.application().configuration().getString("fingerprint.secret"));
+			} catch (Exception e) {
+				// TODO : redirect to 500 error page
+			}
+			LoginForm formObj = submittedForm.get();
+			Logger.debug("User exists, no errors. Found user is: "+formObj);
+			session().put(StoreSecured.COOKIE_KEY_USER, formObj.getLogin());
+			session().put(StoreSecured.COOKIE_KEY_FINGERPRINT, fingerprint);
+			return redirect(routes.UserController.dashboard());
+		}
+		return badRequest(login.render(submittedForm, flash()));
+	}
+	
+	@Transactional
+	@Security.Authenticated(StoreSecured.class)
+	public static Result logout() {
+		session().clear();
+		flash("logout", "1");
+		return redirect(routes.UserController.login());
+	}
+	
+	@Transactional
+	@Security.Authenticated(StoreSecured.class)
+	public static Result dashboard() {
+		return ok(dashboard.render());
+	}
 }

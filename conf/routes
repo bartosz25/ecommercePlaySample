@@ -8,6 +8,10 @@ GET     /                           controllers.ApplicationController.index()
 # User rotures
 GET		/register					controllers.UserController.register()
 POST	/register/action			controllers.UserController.registerSubmit()
+GET		/login						controllers.UserController.login()
+POST	/login/action				controllers.UserController.loginSubmit()
+GET 	/user/logout				controllers.UserController.logout()
+GET		/user/dashboard				controllers.UserController.dashboard()
 
 # Categories routes
 # TODO : rewrite this route with bindable types, as follow

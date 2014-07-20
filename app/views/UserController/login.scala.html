@@ -1,0 +1,15 @@
+@(userForm: play.data.Form[models.forms.LoginForm], flash: play.mvc.Http.Flash)
+@import helper._
+
+@implicitField = @{FieldConstructor(helpers.form.inputFieldHelper.render)}
+
+@main("Welcome to login page") { 
+	@if(flash.get("logout") == "1"){
+		<p>You're correctly logged out</p>
+	}
+	@helper.form(action = routes.UserController.loginSubmit()) {
+    	@helper.inputText(userForm("login"), '_label -> "Login", 'size -> 10)
+    	@helper.inputPassword(userForm("password"), '_label -> "Password")
+    	<input type="submit" name="register" value="login" />
+	}
+}

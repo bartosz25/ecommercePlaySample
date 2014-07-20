@@ -2,6 +2,11 @@ package services;
 
 import java.util.List;
 import javax.persistence.Query;
+
+import exception.UserAuthenticationException;
+import exception.UserNotFoundException;
+
+import play.Logger;
 import play.db.jpa.JPA;
 import security.PasswordCreator;
 import models.User;
@@ -22,14 +27,27 @@ public class UserService {
 	}
 	
 	public boolean isUniqueLogin(String login) {
-		List<User> users = getByLogin(login);
-		return users == null || users.size() == 0;
+		User user = getByLogin(login);
+		return user == null;
 	}
 	
-	public List<User> getByLogin(String login) {
+	public User getByLogin(String login) {
 		Query query = JPA.em().createQuery("SELECT u FROM User u WHERE u.login = :login");
 		query.setParameter("login", login);
-		return query.getResultList();
+		return (User) query.getSingleResult();
+	}
+
+	public User getByLoginAndPassword(String login, String password) {
+		try {
+			User user = getByLogin(login);
+			if (user == null) throw new UserNotFoundException("User with login '"+login+"' was not found");
+			password = PasswordCreator.sha1Password(password, user.getSalt());
+			if (!password.equals(user.getPassword())) throw new UserAuthenticationException("Password for user '"+login+"' doesn't match");
+			return user;
+		} catch (Exception e) {
+			Logger.error("An error occurred on getting user by login and password. Login used: "+login, e);
+		}
+		return null;
 	}
 	
 }

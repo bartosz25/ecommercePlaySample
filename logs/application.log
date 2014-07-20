@@ -1,338 +1,54 @@
-2014-07-14 19:08:05,462 - [INFO] - from play in pool-4-thread-2 
+2014-07-20 11:49:43,110 - [INFO] - from play in pool-4-thread-3 
 Listening for HTTP on /0:0:0:0:0:0:0:0:9000
 
-2014-07-14 19:09:09,649 - [WARN] - from play in play-internal-execution-context-1 
+2014-07-20 11:52:37,512 - [DEBUG] - from application in play-internal-execution-context-1 
+------------- Setting formatters ---------------
 
-In Play 2.3, session.maxAge was changed from being an integer for the number of seconds to being a
-duration. This means you can now specify time units, for example 1h, or 30m etc. If however, no time
-unit is specified, it defaults to milliseconds, making this a breaking change. The configured value
-in this application (300000) does not have a time unit, and is suspiciously low for a session
-timeout, you may need to update your configuration. To prevent this warning message from showing in
-future, either add a time unit to the session.maxAge configuration item (eg, ms), or disable the
-migration helper plugin using play.migrationhelper=disabled.
-            
-
-2014-07-14 19:09:10,653 - [INFO] - from play in play-internal-execution-context-1 
+2014-07-20 11:52:38,472 - [INFO] - from play in play-internal-execution-context-1 
 datasource [mysql://root:root@localhost/play_store] bound to JNDI as DefaultDS
 
-2014-07-14 19:09:12,406 - [INFO] - from play in play-internal-execution-context-1 
+2014-07-20 11:52:38,974 - [INFO] - from play in play-internal-execution-context-1 
 database [default] connected at jdbc:mysql://localhost/play_store?useUnicode=yes&characterEncoding=UTF-8&connectionCollation=utf8_general_ci
 
-2014-07-14 19:09:16,350 - [INFO] - from play in play-internal-execution-context-1 
+2014-07-20 11:52:42,141 - [INFO] - from play in play-internal-execution-context-1 
 Application started (Dev)
 
-2014-07-14 19:09:31,326 - [ERROR] - from play in play-akka.actor.default-dispatcher-9 
-Cannot invoke the action, eventually got an error: javax.validation.ValidationException: HV000028: Unexpected exception during isValid call.
+2014-07-20 11:52:43,178 - [DEBUG] - from application in play-akka.actor.default-dispatcher-3 
+Getting user from StoreSecured getUsername() method
 
-2014-07-14 19:09:31,363 - [ERROR] - from application in play-akka.actor.default-dispatcher-9 
+2014-07-20 11:52:43,179 - [DEBUG] - from application in play-akka.actor.default-dispatcher-2 
+Getting user from StoreSecured getUsername() method
 
+2014-07-20 11:52:43,196 - [DEBUG] - from application in play-akka.actor.default-dispatcher-2 
+Unknown user for the login 'bartosz2'. It mays be session hijacking try because fingerprings aren't the same  (in the session: null, generated: 66f1da55bb7191cabacc4ee06abb0ccbf46bd81f)
 
-! @6ip8ag6b0 - Internal server error, for (POST) [/register/action] ->
+2014-07-20 11:52:43,196 - [DEBUG] - from application in play-akka.actor.default-dispatcher-2 
+User is unathorized to access to the protected ressource. We redirect him to login page
 
-play.api.Application$$anon$1: Execution exception[[ValidationException: HV000028: Unexpected exception during isValid call.]]
-	at play.api.Application$class.handleError(Application.scala:296) ~[play_2.11-2.3.1.jar:2.3.1]
-	at play.api.DefaultApplication.handleError(Application.scala:402) ~[play_2.11-2.3.1.jar:2.3.1]
-	at play.core.server.netty.PlayDefaultUpstreamHandler$$anonfun$3$$anonfun$applyOrElse$4.apply(PlayDefaultUpstreamHandler.scala:320) ~[play_2.11-2.3.1.jar:2.3.1]
-	at play.core.server.netty.PlayDefaultUpstreamHandler$$anonfun$3$$anonfun$applyOrElse$4.apply(PlayDefaultUpstreamHandler.scala:320) ~[play_2.11-2.3.1.jar:2.3.1]
-	at scala.Option.map(Option.scala:145) ~[scala-library-2.11.1.jar:na]
-	at play.core.server.netty.PlayDefaultUpstreamHandler$$anonfun$3.applyOrElse(PlayDefaultUpstreamHandler.scala:320) ~[play_2.11-2.3.1.jar:2.3.1]
-	at play.core.server.netty.PlayDefaultUpstreamHandler$$anonfun$3.applyOrElse(PlayDefaultUpstreamHandler.scala:316) ~[play_2.11-2.3.1.jar:2.3.1]
-	at scala.concurrent.Future$$anonfun$recoverWith$1.apply(Future.scala:344) ~[scala-library-2.11.1.jar:na]
-	at scala.concurrent.Future$$anonfun$recoverWith$1.apply(Future.scala:343) ~[scala-library-2.11.1.jar:na]
-	at scala.concurrent.impl.CallbackRunnable.run(Promise.scala:32) ~[scala-library-2.11.1.jar:na]
-	at play.api.libs.iteratee.Execution$trampoline$.execute(Execution.scala:46) ~[play-iteratees_2.11-2.3.1.jar:2.3.1]
-	at scala.concurrent.impl.CallbackRunnable.executeWithValue(Promise.scala:40) ~[scala-library-2.11.1.jar:na]
-	at scala.concurrent.impl.Promise$DefaultPromise.tryComplete(Promise.scala:248) ~[scala-library-2.11.1.jar:na]
-	at scala.concurrent.Promise$class.complete(Promise.scala:55) ~[scala-library-2.11.1.jar:na]
-	at scala.concurrent.impl.Promise$DefaultPromise.complete(Promise.scala:153) ~[scala-library-2.11.1.jar:na]
-	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:23) ~[scala-library-2.11.1.jar:na]
-	at akka.dispatch.TaskInvocation.run(AbstractDispatcher.scala:41) ~[akka-actor_2.11-2.3.3.jar:na]
-	at akka.dispatch.ForkJoinExecutorConfigurator$AkkaForkJoinTask.exec(AbstractDispatcher.scala:393) ~[akka-actor_2.11-2.3.3.jar:na]
-	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260) ~[scala-library-2.11.1.jar:na]
-	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339) ~[scala-library-2.11.1.jar:na]
-	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979) ~[scala-library-2.11.1.jar:na]
-	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107) ~[scala-library-2.11.1.jar:na]
-Caused by: javax.validation.ValidationException: HV000028: Unexpected exception during isValid call.
-	at org.hibernate.validator.internal.engine.constraintvalidation.ConstraintTree.validateSingleConstraint(ConstraintTree.java:284) ~[hibernate-validator-5.0.3.Final.jar:5.0.3.Final]
-	at org.hibernate.validator.internal.engine.constraintvalidation.ConstraintTree.validateConstraints(ConstraintTree.java:133) ~[hibernate-validator-5.0.3.Final.jar:5.0.3.Final]
-	at org.hibernate.validator.internal.engine.constraintvalidation.ConstraintTree.validateConstraints(ConstraintTree.java:91) ~[hibernate-validator-5.0.3.Final.jar:5.0.3.Final]
-	at org.hibernate.validator.internal.metadata.core.MetaConstraint.validateConstraint(MetaConstraint.java:85) ~[hibernate-validator-5.0.3.Final.jar:5.0.3.Final]
-	at org.hibernate.validator.internal.engine.ValidatorImpl.validateConstraint(ValidatorImpl.java:478) ~[hibernate-validator-5.0.3.Final.jar:5.0.3.Final]
-	at org.hibernate.validator.internal.engine.ValidatorImpl.validateConstraintsForDefaultGroup(ValidatorImpl.java:424) ~[hibernate-validator-5.0.3.Final.jar:5.0.3.Final]
-	at org.hibernate.validator.internal.engine.ValidatorImpl.validateConstraintsForCurrentGroup(ValidatorImpl.java:388) ~[hibernate-validator-5.0.3.Final.jar:5.0.3.Final]
-	at org.hibernate.validator.internal.engine.ValidatorImpl.validateInContext(ValidatorImpl.java:340) ~[hibernate-validator-5.0.3.Final.jar:5.0.3.Final]
-	at org.hibernate.validator.internal.engine.ValidatorImpl.validate(ValidatorImpl.java:158) ~[hibernate-validator-5.0.3.Final.jar:5.0.3.Final]
-	at org.springframework.validation.beanvalidation.SpringValidatorAdapter.validate(SpringValidatorAdapter.java:208) ~[spring-context-4.0.3.RELEASE.jar:4.0.3.RELEASE]
-	at play.data.Form.bind(Form.java:333) ~[play-java_2.11-2.3.1.jar:2.3.1]
-	at play.data.Form.bindFromRequest(Form.java:221) ~[play-java_2.11-2.3.1.jar:2.3.1]
-	at controllers.UserController.registerSubmit(UserController.java:31) ~[classes/:na]
-	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$3$$anonfun$apply$3.apply(routes_routing.scala:120) ~[classes/:na]
-	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$3$$anonfun$apply$3.apply(routes_routing.scala:120) ~[classes/:na]
-	at play.core.Router$HandlerInvokerFactory$$anon$4.resultCall(Router.scala:264) ~[play_2.11-2.3.1.jar:2.3.1]
-	at play.core.Router$HandlerInvokerFactory$JavaActionInvokerFactory$$anon$15$$anon$1.invocation(Router.scala:255) ~[play_2.11-2.3.1.jar:2.3.1]
-	at play.core.j.JavaAction$$anon$1.call(JavaAction.scala:55) ~[play_2.11-2.3.1.jar:2.3.1]
-	at play.GlobalSettings$1.call(GlobalSettings.java:67) ~[play_2.11-2.3.1.jar:2.3.1]
-	at play.db.jpa.TransactionalAction$1.apply(TransactionalAction.java:23) ~[play-java-jpa_2.11-2.3.1.jar:2.3.1]
-	at play.db.jpa.TransactionalAction$1.apply(TransactionalAction.java:21) ~[play-java-jpa_2.11-2.3.1.jar:2.3.1]
-	at play.db.jpa.JPA.withTransactionAsync(JPA.java:180) ~[play-java-jpa_2.11-2.3.1.jar:2.3.1]
-	at play.db.jpa.TransactionalAction.call(TransactionalAction.java:18) ~[play-java-jpa_2.11-2.3.1.jar:2.3.1]
-	at play.core.j.JavaAction$$anonfun$11.apply(JavaAction.scala:82) ~[play_2.11-2.3.1.jar:2.3.1]
-	at play.core.j.JavaAction$$anonfun$11.apply(JavaAction.scala:82) ~[play_2.11-2.3.1.jar:2.3.1]
-	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) ~[scala-library-2.11.1.jar:na]
-	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) ~[scala-library-2.11.1.jar:na]
-	at play.core.j.HttpExecutionContext$$anon$2.run(HttpExecutionContext.scala:40) ~[play_2.11-2.3.1.jar:2.3.1]
-	at play.api.libs.iteratee.Execution$trampoline$.execute(Execution.scala:46) ~[play-iteratees_2.11-2.3.1.jar:2.3.1]
-	at play.core.j.HttpExecutionContext.execute(HttpExecutionContext.scala:32) ~[play_2.11-2.3.1.jar:2.3.1]
-	at scala.concurrent.impl.Future$.apply(Future.scala:31) ~[scala-library-2.11.1.jar:na]
-	at scala.concurrent.Future$.apply(Future.scala:492) ~[scala-library-2.11.1.jar:na]
-	at play.core.j.JavaAction$class.apply(JavaAction.scala:82) ~[play_2.11-2.3.1.jar:2.3.1]
-	at play.core.Router$HandlerInvokerFactory$JavaActionInvokerFactory$$anon$15$$anon$1.apply(Router.scala:252) ~[play_2.11-2.3.1.jar:2.3.1]
-	at play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$4$$anonfun$apply$5.apply(Action.scala:130) ~[play_2.11-2.3.1.jar:2.3.1]
-	at play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$4$$anonfun$apply$5.apply(Action.scala:130) ~[play_2.11-2.3.1.jar:2.3.1]
-	at play.utils.Threads$.withContextClassLoader(Threads.scala:21) ~[play_2.11-2.3.1.jar:2.3.1]
-	at play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$4.apply(Action.scala:129) ~[play_2.11-2.3.1.jar:2.3.1]
-	at play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$4.apply(Action.scala:128) ~[play_2.11-2.3.1.jar:2.3.1]
-	at scala.Option.map(Option.scala:145) ~[scala-library-2.11.1.jar:na]
-	at play.api.mvc.Action$$anonfun$apply$1.apply(Action.scala:128) ~[play_2.11-2.3.1.jar:2.3.1]
-	at play.api.mvc.Action$$anonfun$apply$1.apply(Action.scala:121) ~[play_2.11-2.3.1.jar:2.3.1]
-	at play.api.libs.iteratee.Iteratee$$anonfun$mapM$1.apply(Iteratee.scala:483) ~[play-iteratees_2.11-2.3.1.jar:2.3.1]
-	at play.api.libs.iteratee.Iteratee$$anonfun$mapM$1.apply(Iteratee.scala:483) ~[play-iteratees_2.11-2.3.1.jar:2.3.1]
-	at play.api.libs.iteratee.Iteratee$$anonfun$flatMapM$1.apply(Iteratee.scala:519) ~[play-iteratees_2.11-2.3.1.jar:2.3.1]
-	at play.api.libs.iteratee.Iteratee$$anonfun$flatMapM$1.apply(Iteratee.scala:519) ~[play-iteratees_2.11-2.3.1.jar:2.3.1]
-	at play.api.libs.iteratee.Iteratee$$anonfun$flatMap$1$$anonfun$apply$14.apply(Iteratee.scala:496) ~[play-iteratees_2.11-2.3.1.jar:2.3.1]
-	at play.api.libs.iteratee.Iteratee$$anonfun$flatMap$1$$anonfun$apply$14.apply(Iteratee.scala:496) ~[play-iteratees_2.11-2.3.1.jar:2.3.1]
-	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) ~[scala-library-2.11.1.jar:na]
-	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) ~[scala-library-2.11.1.jar:na]
-	... 6 common frames omitted
-Caused by: java.lang.NullPointerException: null
-	at java.util.Date.getMillisOf(Date.java:956) ~[na:1.7.0_25]
-	at java.util.Date.before(Date.java:915) ~[na:1.7.0_25]
-	at constraints.validators.BeforeDateValidator.isValid(BeforeDateValidator.java:38) ~[classes/:na]
-	at constraints.validators.BeforeDateValidator.isValid(BeforeDateValidator.java:18) ~[classes/:na]
-	at play.data.validation.Constraints$Validator.isValid(Constraints.java:42) ~[play-java_2.11-2.3.1.jar:2.3.1]
-	at org.hibernate.validator.internal.engine.constraintvalidation.ConstraintTree.validateSingleConstraint(ConstraintTree.java:281) ~[hibernate-validator-5.0.3.Final.jar:5.0.3.Final]
-	... 55 common frames omitted
+2014-07-20 11:52:43,197 - [DEBUG] - from application in play-akka.actor.default-dispatcher-3 
+Unknown user for the login 'null'. It mays be session hijacking try because fingerprings aren't the same  (in the session: null, generated: db9e3fc52a7001b98a1a42ff2c336c0bbe396147)
 
-2014-07-14 19:10:33,006 - [WARN] - from play in play-internal-execution-context-1 
+2014-07-20 11:52:43,199 - [DEBUG] - from application in play-akka.actor.default-dispatcher-3 
+User is unathorized to access to the protected ressource. We redirect him to login page
 
-In Play 2.3, session.maxAge was changed from being an integer for the number of seconds to being a
-duration. This means you can now specify time units, for example 1h, or 30m etc. If however, no time
-unit is specified, it defaults to milliseconds, making this a breaking change. The configured value
-in this application (300000) does not have a time unit, and is suspiciously low for a session
-timeout, you may need to update your configuration. To prevent this warning message from showing in
-future, either add a time unit to the session.maxAge configuration item (eg, ms), or disable the
-migration helper plugin using play.migrationhelper=disabled.
-            
+2014-07-20 11:53:10,131 - [DEBUG] - from application in play-akka.actor.default-dispatcher-6 
+User exists, no errors. Found user is: LoginForm {login: bartosz2}
 
-2014-07-14 19:10:33,103 - [INFO] - from play in play-internal-execution-context-1 
-datasource [mysql://root:root@localhost/play_store] bound to JNDI as DefaultDS
+2014-07-20 11:53:10,268 - [DEBUG] - from application in play-akka.actor.default-dispatcher-4 
+Getting user from StoreSecured getUsername() method
 
-2014-07-14 19:10:33,197 - [INFO] - from play in play-internal-execution-context-1 
-database [default] connected at jdbc:mysql://localhost/play_store?useUnicode=yes&characterEncoding=UTF-8&connectionCollation=utf8_general_ci
+2014-07-20 11:53:45,151 - [DEBUG] - from application in play-akka.actor.default-dispatcher-9 
+Getting user from StoreSecured getUsername() method
 
-2014-07-14 19:10:33,650 - [INFO] - from play in play-internal-execution-context-1 
-Application started (Dev)
+2014-07-20 11:53:45,152 - [DEBUG] - from application in play-akka.actor.default-dispatcher-9 
+Unknown user for the login 'bartosz2'. It mays be session hijacking try because fingerprings aren't the same  (in the session: db9e3fc52a7001b98a1a42ff2c336c0bbe396147, generated: 66f1da55bb7191cabacc4ee06abb0ccbf46bd81f)
 
-2014-07-14 19:10:33,796 - [DEBUG] - from application in play-akka.actor.default-dispatcher-5 
-Data is :{register=register, login=, password=}
+2014-07-20 11:53:45,153 - [DEBUG] - from application in play-akka.actor.default-dispatcher-9 
+User is unathorized to access to the protected ressource. We redirect him to login page
 
-2014-07-14 19:10:33,797 - [DEBUG] - from application in play-akka.actor.default-dispatcher-5 
-User errors :{createdTime=[ValidationError(createdTime,[Register date can't be in the past],[now])], login=[ValidationError(login,[Login is mandatory field],[])], password=[ValidationError(password,[Password is mandatory field],[])]}
+2014-07-20 11:54:46,182 - [DEBUG] - from application in play-akka.actor.default-dispatcher-10 
+User exists, no errors. Found user is: LoginForm {login: bartosz2}
 
-2014-07-14 19:10:33,798 - [DEBUG] - from application in play-akka.actor.default-dispatcher-5 
-User global errors :[]
-
-2014-07-14 19:10:33,798 - [DEBUG] - from application in play-akka.actor.default-dispatcher-5 
-User hasGlobalErrors :false
-
-2014-07-14 19:10:33,799 - [DEBUG] - from application in play-akka.actor.default-dispatcher-5 
-User hasErrors :true
-
-2014-07-14 19:10:58,298 - [DEBUG] - from application in play-akka.actor.default-dispatcher-11 
-Data is :{register=register, login=, password=}
-
-2014-07-14 19:10:58,299 - [DEBUG] - from application in play-akka.actor.default-dispatcher-11 
-User errors :{createdTime=[ValidationError(createdTime,[Register date can't be in the past],[now])], login=[ValidationError(login,[Login is mandatory field],[])], password=[ValidationError(password,[Password is mandatory field],[])]}
-
-2014-07-14 19:10:58,299 - [DEBUG] - from application in play-akka.actor.default-dispatcher-11 
-User global errors :[]
-
-2014-07-14 19:10:58,299 - [DEBUG] - from application in play-akka.actor.default-dispatcher-11 
-User hasGlobalErrors :false
-
-2014-07-14 19:10:58,300 - [DEBUG] - from application in play-akka.actor.default-dispatcher-11 
-User hasErrors :true
-
-2014-07-14 19:11:00,595 - [DEBUG] - from application in play-akka.actor.default-dispatcher-14 
-Data is :{register=register, login=, password=}
-
-2014-07-14 19:11:00,596 - [DEBUG] - from application in play-akka.actor.default-dispatcher-14 
-User errors :{createdTime=[ValidationError(createdTime,[Register date can't be in the past],[now])], login=[ValidationError(login,[Login is mandatory field],[])], password=[ValidationError(password,[Password is mandatory field],[])]}
-
-2014-07-14 19:11:00,596 - [DEBUG] - from application in play-akka.actor.default-dispatcher-14 
-User global errors :[]
-
-2014-07-14 19:11:00,598 - [DEBUG] - from application in play-akka.actor.default-dispatcher-14 
-User hasGlobalErrors :false
-
-2014-07-14 19:11:00,598 - [DEBUG] - from application in play-akka.actor.default-dispatcher-14 
-User hasErrors :true
-
-2014-07-14 19:11:34,807 - [WARN] - from play in play-internal-execution-context-1 
-
-In Play 2.3, session.maxAge was changed from being an integer for the number of seconds to being a
-duration. This means you can now specify time units, for example 1h, or 30m etc. If however, no time
-unit is specified, it defaults to milliseconds, making this a breaking change. The configured value
-in this application (300000) does not have a time unit, and is suspiciously low for a session
-timeout, you may need to update your configuration. To prevent this warning message from showing in
-future, either add a time unit to the session.maxAge configuration item (eg, ms), or disable the
-migration helper plugin using play.migrationhelper=disabled.
-            
-
-2014-07-14 19:11:34,888 - [INFO] - from play in play-internal-execution-context-1 
-datasource [mysql://root:root@localhost/play_store] bound to JNDI as DefaultDS
-
-2014-07-14 19:11:34,989 - [INFO] - from play in play-internal-execution-context-1 
-database [default] connected at jdbc:mysql://localhost/play_store?useUnicode=yes&characterEncoding=UTF-8&connectionCollation=utf8_general_ci
-
-2014-07-14 19:11:35,900 - [INFO] - from play in play-internal-execution-context-1 
-Application started (Dev)
-
-2014-07-14 19:11:35,968 - [DEBUG] - from application in play-akka.actor.default-dispatcher-13 
-Validating null
-
-2014-07-14 19:11:35,971 - [DEBUG] - from application in play-akka.actor.default-dispatcher-13 
-Data is :{register=register, login=, password=}
-
-2014-07-14 19:11:35,972 - [DEBUG] - from application in play-akka.actor.default-dispatcher-13 
-User errors :{createdTime=[ValidationError(createdTime,[Register date can't be in the past],[now])], login=[ValidationError(login,[Login is mandatory field],[])], password=[ValidationError(password,[Password is mandatory field],[])]}
-
-2014-07-14 19:11:35,973 - [DEBUG] - from application in play-akka.actor.default-dispatcher-13 
-User global errors :[]
-
-2014-07-14 19:11:35,973 - [DEBUG] - from application in play-akka.actor.default-dispatcher-13 
-User hasGlobalErrors :false
-
-2014-07-14 19:11:35,973 - [DEBUG] - from application in play-akka.actor.default-dispatcher-13 
-User hasErrors :true
-
-2014-07-14 19:15:16,804 - [WARN] - from play in play-internal-execution-context-1 
-
-In Play 2.3, session.maxAge was changed from being an integer for the number of seconds to being a
-duration. This means you can now specify time units, for example 1h, or 30m etc. If however, no time
-unit is specified, it defaults to milliseconds, making this a breaking change. The configured value
-in this application (300000) does not have a time unit, and is suspiciously low for a session
-timeout, you may need to update your configuration. To prevent this warning message from showing in
-future, either add a time unit to the session.maxAge configuration item (eg, ms), or disable the
-migration helper plugin using play.migrationhelper=disabled.
-            
-
-2014-07-14 19:15:16,871 - [INFO] - from play in play-internal-execution-context-1 
-datasource [mysql://root:root@localhost/play_store] bound to JNDI as DefaultDS
-
-2014-07-14 19:15:16,947 - [INFO] - from play in play-internal-execution-context-1 
-database [default] connected at jdbc:mysql://localhost/play_store?useUnicode=yes&characterEncoding=UTF-8&connectionCollation=utf8_general_ci
-
-2014-07-14 19:15:17,393 - [INFO] - from play in play-internal-execution-context-1 
-Application started (Dev)
-
-2014-07-14 19:15:17,448 - [DEBUG] - from application in play-akka.actor.default-dispatcher-13 
-Validating null
-
-2014-07-14 19:15:17,450 - [DEBUG] - from application in play-akka.actor.default-dispatcher-13 
-Data is :{register=register, login=, password=}
-
-2014-07-14 19:15:17,452 - [DEBUG] - from application in play-akka.actor.default-dispatcher-13 
-User errors :{createdTime=[ValidationError(createdTime,[Register date can't be in the past],[now])], login=[ValidationError(login,[Login is mandatory field],[])], password=[ValidationError(password,[Password is mandatory field],[])]}
-
-2014-07-14 19:15:17,452 - [DEBUG] - from application in play-akka.actor.default-dispatcher-13 
-User global errors :[]
-
-2014-07-14 19:15:17,452 - [DEBUG] - from application in play-akka.actor.default-dispatcher-13 
-User hasGlobalErrors :false
-
-2014-07-14 19:15:17,452 - [DEBUG] - from application in play-akka.actor.default-dispatcher-13 
-User hasErrors :true
-
-2014-07-14 19:17:11,445 - [WARN] - from play in play-internal-execution-context-1 
-
-In Play 2.3, session.maxAge was changed from being an integer for the number of seconds to being a
-duration. This means you can now specify time units, for example 1h, or 30m etc. If however, no time
-unit is specified, it defaults to milliseconds, making this a breaking change. The configured value
-in this application (300000) does not have a time unit, and is suspiciously low for a session
-timeout, you may need to update your configuration. To prevent this warning message from showing in
-future, either add a time unit to the session.maxAge configuration item (eg, ms), or disable the
-migration helper plugin using play.migrationhelper=disabled.
-            
-
-2014-07-14 19:17:11,506 - [INFO] - from play in play-internal-execution-context-1 
-datasource [mysql://root:root@localhost/play_store] bound to JNDI as DefaultDS
-
-2014-07-14 19:17:11,626 - [INFO] - from play in play-internal-execution-context-1 
-database [default] connected at jdbc:mysql://localhost/play_store?useUnicode=yes&characterEncoding=UTF-8&connectionCollation=utf8_general_ci
-
-2014-07-14 19:17:11,927 - [INFO] - from play in play-internal-execution-context-1 
-Application started (Dev)
-
-2014-07-14 19:17:11,975 - [DEBUG] - from application in play-akka.actor.default-dispatcher-13 
-Validating null
-
-2014-07-14 19:17:11,980 - [DEBUG] - from application in play-akka.actor.default-dispatcher-13 
-Validating null
-
-2014-07-14 19:17:11,982 - [DEBUG] - from application in play-akka.actor.default-dispatcher-13 
-Data is :{register=register, login=, password=}
-
-2014-07-14 19:17:11,982 - [DEBUG] - from application in play-akka.actor.default-dispatcher-13 
-User errors :{createdTime=[ValidationError(createdTime,[Register date can't be in the past],[now])], login=[ValidationError(login,[Login is mandatory field],[])], password=[ValidationError(password,[Password is mandatory field],[])]}
-
-2014-07-14 19:17:11,982 - [DEBUG] - from application in play-akka.actor.default-dispatcher-13 
-User global errors :[]
-
-2014-07-14 19:17:11,982 - [DEBUG] - from application in play-akka.actor.default-dispatcher-13 
-User hasGlobalErrors :false
-
-2014-07-14 19:17:11,983 - [DEBUG] - from application in play-akka.actor.default-dispatcher-13 
-User hasErrors :true
-
-2014-07-14 19:17:45,675 - [WARN] - from play in play-internal-execution-context-1 
-
-In Play 2.3, session.maxAge was changed from being an integer for the number of seconds to being a
-duration. This means you can now specify time units, for example 1h, or 30m etc. If however, no time
-unit is specified, it defaults to milliseconds, making this a breaking change. The configured value
-in this application (300000) does not have a time unit, and is suspiciously low for a session
-timeout, you may need to update your configuration. To prevent this warning message from showing in
-future, either add a time unit to the session.maxAge configuration item (eg, ms), or disable the
-migration helper plugin using play.migrationhelper=disabled.
-            
-
-2014-07-14 19:17:45,783 - [INFO] - from play in play-internal-execution-context-1 
-datasource [mysql://root:root@localhost/play_store] bound to JNDI as DefaultDS
-
-2014-07-14 19:17:45,870 - [INFO] - from play in play-internal-execution-context-1 
-database [default] connected at jdbc:mysql://localhost/play_store?useUnicode=yes&characterEncoding=UTF-8&connectionCollation=utf8_general_ci
-
-2014-07-14 19:17:46,418 - [INFO] - from play in play-internal-execution-context-1 
-Application started (Dev)
-
-2014-07-14 19:17:46,516 - [DEBUG] - from application in play-akka.actor.default-dispatcher-22 
-Validating null
-
-2014-07-14 19:17:46,527 - [DEBUG] - from application in play-akka.actor.default-dispatcher-22 
-Validating null
-
-2014-07-14 19:17:46,530 - [DEBUG] - from application in play-akka.actor.default-dispatcher-22 
-Data is :{createdDate=Mon Jul 14 19:17:46 CEST 2014}
-
-2014-07-14 19:17:46,530 - [DEBUG] - from application in play-akka.actor.default-dispatcher-22 
-User errors :{createdTime=[ValidationError(createdTime,[Register date can't be in the past],[now])], login=[ValidationError(login,[Login is mandatory field],[])], password=[ValidationError(password,[Password is mandatory field],[])]}
-
-2014-07-14 19:17:46,530 - [DEBUG] - from application in play-akka.actor.default-dispatcher-22 
-User global errors :[]
-
-2014-07-14 19:17:46,530 - [DEBUG] - from application in play-akka.actor.default-dispatcher-22 
-User hasGlobalErrors :false
-
-2014-07-14 19:17:46,531 - [DEBUG] - from application in play-akka.actor.default-dispatcher-22 
-User hasErrors :true
+2014-07-20 11:54:46,207 - [DEBUG] - from application in play-akka.actor.default-dispatcher-10 
+Getting user from StoreSecured getUsername() method
 
