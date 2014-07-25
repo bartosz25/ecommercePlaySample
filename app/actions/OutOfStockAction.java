@@ -1,7 +1,12 @@
 package actions;
 
+import java.util.Date;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 import controllers.routes;
@@ -12,6 +17,7 @@ import play.libs.F.Promise;
 import play.mvc.Action;
 import play.mvc.Http.Context;
 import play.mvc.Result;
+import play.mvc.Results;
 import services.ProductService;
 import services.ServicesInstances;
 import tools.converters.FromStringConverter;
@@ -25,57 +31,38 @@ import play.db.jpa.Transactional;
  * @author bartosz
  *
  */
-public class OutOfStockAction extends Action.Simple {
+public class OutOfStockAction extends Action<OutOfStockAction>  {
 
 	@Override
-	@Transactional
 	public Promise<Result> call(Context ctx) throws Throwable {
 		Logger.debug("Invoking OutOfStock before adding a product to the shopping cart");
-		String[] parts = ctx.current().request().path().split("/");
-		Product product = null;
+		String[] parts = Context.current().request().path().split("/");
+		final int productId = FromStringConverter.toInt(parts[parts.length-1]);
 		try {
-			final int productId = FromStringConverter.toInt(parts[parts.length-1]);
 			// We can't use service even with @Transactional annotation; an exception "no EntityManager is bound"
 			// is thrown every time. JPA.withTransaction is possible workaround.
 			Boolean inStock = JPA.withTransaction(new F.Function0<Boolean>() {
 				@Override
 				public Boolean apply() throws Throwable {
-					ProductService productService = (ProductService) ServicesInstances.PRODUCT_SERVICE.getService();
 					Query inStockQuery = JPA.em().createQuery("SELECT p FROM Product p WHERE p.id = :productId AND p.inStock = :inStock");
 					inStockQuery.setParameter("productId", productId);
 					inStockQuery.setParameter("inStock", Product.IN_STOCK);
 					Product product = null;
 					try {
 						product = (Product) inStockQuery.getSingleResult();
+					} catch (NoResultException nre) {
 					} catch (Exception e) {
+						Logger.error("An error occurred on checking product ("+productId+") availability", e);
 					}
 					return product != null;
 				}
 			});
-			if (inStock.booleanValue()) {
-				Logger.debug("Product is in stock, we continue @With execution chain");
-				delegate.call(ctx);
+			if (inStock.booleanValue() == true) {
+				return delegate.call(ctx);
 			}
-			Logger.debug("Product is out of stock, we abort @With execution chain");
-			product = JPA.withTransaction(new F.Function0<Product>() {
-				@Override
-				public Product apply() throws Throwable {
-					Query query = JPA.em().createQuery("SELECT p FROM Product p WHERE p.id = :productId");
-					query.setParameter("productId", productId);
-					try {
-						return (Product) query.getSingleResult();
-					} catch (Exception e) {
-						
-					}
-					return null;
-				}
-			});
-			
 		} catch (Exception e) {
-			Logger.error("An error occurred on checking if product is in stock for path "+ctx.current().request().path(), e);
+			Logger.error("An error occurred on checking if product is in stock for path "+Context.current().request().path(), e);
 		}
-		Logger.debug("Return redirect for product "+product);
-		return F.Promise.pure(redirect(routes.ProductController.productUnavailable(product.getId())));
+		return F.Promise.pure(redirect(routes.ProductController.productUnavailable(productId)));
 	}
-
 }

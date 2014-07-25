@@ -84,14 +84,14 @@ public class Product {
 		this.shoppingCartProducts = shoppingCartProducts;
 	}
 	
-	@Transient
-	public boolean isInStock() {
-		return this.inStock == IN_STOCK;
-	}
+//	@Transient
+//	public boolean isInStock() {
+//		return this.inStock == IN_STOCK;
+//	}
 	
 	@Override
 	public String toString() {
-		return "Product {id: "+this.id+", name: "+this.name+", category: "+this.category+", price: "+this.price+", in stock: "+isInStock()+"}";
+		return "Product {id: "+this.id+", name: "+this.name+", category: "+this.category+", price: "+this.price+", in stock: "+this.inStock+"}";
 	}
 	
 }
