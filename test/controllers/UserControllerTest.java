@@ -50,13 +50,20 @@ public class UserControllerTest /*extends WithApplication*/ {
 	        public void invoke(TestBrowser browser) {
 	            browser.goTo("http://localhost:3333/user/dashboard");
 	            // we check if connection form is present at the page
+	            assertTrue("Page should end with /login path", browser.url().endsWith("/login"));
+	            
+	            FluentList<FluentWebElement> loginField = browser.find("#login");
+	            FluentList<FluentWebElement> passwordField = browser.find("#login");
+	            assertTrue("Login field should be found on the page but it wasn't", loginField != null && loginField.size() == 1);
+	            assertTrue("Password field should be found on the page but it wasn't", passwordField != null && passwordField.size() == 1);
 
 	            
 	            browser.fill("#login").with("bartosz2");
 	            browser.fill("#password").with("bartosz2");
 	            browser.submit("#loginForm");
 	            
-
+	            // check if user was correctly connected
+	            assertTrue("Page should end with /user/dashboard path", browser.url().endsWith("/user/dashboard"));
 	        }
 	    });
 	}
