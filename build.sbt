@@ -13,5 +13,7 @@ libraryDependencies ++= Seq(
   javaWs,
   javaJpa,
   "org.hibernate" % "hibernate-entitymanager" % "3.6.9.Final",
-  "mysql" % "mysql-connector-java" % "5.1.31"
+  "mysql" % "mysql-connector-java" % "5.1.31",
+  "com.novocode" % "junit-interface" % "0.9" % "test"
 )
+ 

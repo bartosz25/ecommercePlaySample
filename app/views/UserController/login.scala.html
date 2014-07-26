@@ -7,7 +7,7 @@
 	@if(flash.get("logout") == "1"){
 		<p>You're correctly logged out</p>
 	}
-	@helper.form(action = routes.UserController.loginSubmit()) {
+	@helper.form(action = routes.UserController.loginSubmit(), 'id -> "loginForm") {
     	@helper.inputText(userForm("login"), '_label -> "Login", 'size -> 10)
     	@helper.inputPassword(userForm("password"), '_label -> "Password")
     	<input type="submit" name="register" value="login" />

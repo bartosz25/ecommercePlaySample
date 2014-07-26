@@ -96,6 +96,7 @@ public class UserController extends Controller {
 	@Transactional
 	@Security.Authenticated(StoreSecured.class)
 	public static Result dashboard() {
+		Logger.debug("Dashboard called before the render");
 		return ok(dashboard.render());
 	}
 }

@@ -11,14 +11,15 @@ import services.ProductService;
 import services.ServicesInstances;
 import services.ShoppingCartService;
 import tools.web.UrlNormalizer;
-import actions.OutOfStockAction;;
-
+import actions.OutOfStockAction;
+import actions.TestAction;
 
 public class ShoppingCartController extends Controller {
-	
+
+	@With({OutOfStockAction.class, TestAction.class})
 	@Transactional
-	@With({OutOfStockAction.class})
 	public static Result addProduct(int productId) {
+		Logger.debug("Adding product to the cart called");
 		ProductService productService = (ProductService) ServicesInstances.PRODUCT_SERVICE.getService();
 		ShoppingCartService shoppingCartService = (ShoppingCartService) ServicesInstances.SHOPPING_CART_SERVICE.getService();
 		boolean productAdded = false;
