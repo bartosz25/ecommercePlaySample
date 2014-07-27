@@ -10,24 +10,39 @@ import java.util.Map;
 
 import org.junit.Test;
 
+import com.typesafe.config.Config;
+import com.typesafe.config.ConfigFactory;
+
+import play.Configuration;
+import play.GlobalSettings;
 import play.db.jpa.JPA;
 import play.libs.F;
 import play.mvc.Result;
 import play.test.FakeApplication;
 import play.test.Helpers;
+import play.test.WithApplication;
+import settings.TestSettings;
 
 public class CategoryControllerTest {
 
-    @Test
-    public void checkProductsList() {
-    	/**
-    	 *  FakeApplication is a kind of mocked application context. Without it we won't able to run controllers. By running them
-    	 *  by simple execution (Result result = CategoryController.showOne(1, 1)) you'll receive RuntimeExceptions of following
-    	 *  type:
-    	 *  <pre>
-    	 *  java.lang.RuntimeException: There is no started application
-    	 *  </pre>
-    	 */  
+	@Test
+	public void checkProductsList() {
+		/**
+		 *  FakeApplication is a kind of mocked application context. Without it we won't able to run controllers. By running them
+		 *  by simple execution (Result result = CategoryController.showOne(1, 1)) you'll receive RuntimeExceptions of following
+		 *  type:
+		 *  <pre>
+		 *  java.lang.RuntimeException: There is no started application
+		 *  </pre>
+		 *  
+		 *  If one class extends WithApplication, we don't need to create FakeApplication manually. This object
+		 *  is automatically created by provideFakeApplication() method of WithApplication class and is accessible
+		 *  as a protected field called app. 
+		 *  
+		 *  We don't do that because of connection problems to test database. If we 
+		 *  use manually made FakeApplication, the test case is able to connect to play_store_test. But if we use
+		 *  app field and extends the class with WithApplication, the test can't connect to test database.
+		 */  
 		FakeApplication fakeApp = Helpers.fakeApplication();
 		
 		final Map<String, String> threads = new HashMap<String, String>();

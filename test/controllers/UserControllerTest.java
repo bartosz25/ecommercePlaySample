@@ -17,7 +17,7 @@ import play.mvc.Result;
 
 import play.test.*;
 import static play.test.Helpers.*;
-public class UserControllerTest /*extends WithApplication*/ {
+public class UserControllerTest  {
 
 	private static final int SERVER_PORT = 3333;
 	
@@ -29,14 +29,15 @@ public class UserControllerTest /*extends WithApplication*/ {
 	public void dashboardAccessDenied() {
 	    running(testServer(SERVER_PORT), HTMLUNIT, new Callback<TestBrowser>() {
 	        public void invoke(TestBrowser browser) {
-	            browser.goTo("http://localhost:3333/user/dashboard");
-	            // we check if connection form is present at the page
-	            assertTrue("Page should end with /login path", browser.url().endsWith("/login"));
-	            
-	            FluentList<FluentWebElement> loginField = browser.find("#login");
-	            FluentList<FluentWebElement> passwordField = browser.find("#login");
-	            assertTrue("Login field should be found on the page but it wasn't", loginField != null && loginField.size() == 1);
-	            assertTrue("Password field should be found on the page but it wasn't", passwordField != null && passwordField.size() == 1);
+        		// indicate to browser to access protected resource as anonymous user
+	        	browser.goTo("http://localhost:3333/user/dashboard");
+
+				// we check if connection form is present at the page. find method supports CSS selectors.
+				assertTrue("Page should end with /login path", browser.url().endsWith("/login"));
+				FluentList<FluentWebElement> loginField = browser.find("#login");
+				FluentList<FluentWebElement> passwordField = browser.find("#login");
+				assertTrue("Login field should be found on the page but it wasn't", loginField != null && loginField.size() == 1);
+				assertTrue("Password field should be found on the page but it wasn't", passwordField != null && passwordField.size() == 1);
 	        }
 	    });
 	}
@@ -49,15 +50,15 @@ public class UserControllerTest /*extends WithApplication*/ {
 		running(testServer(SERVER_PORT), HTMLUNIT, new Callback<TestBrowser>() {
 	        public void invoke(TestBrowser browser) {
 	            browser.goTo("http://localhost:3333/user/dashboard");
+	            
 	            // we check if connection form is present at the page
 	            assertTrue("Page should end with /login path", browser.url().endsWith("/login"));
-	            
 	            FluentList<FluentWebElement> loginField = browser.find("#login");
 	            FluentList<FluentWebElement> passwordField = browser.find("#login");
 	            assertTrue("Login field should be found on the page but it wasn't", loginField != null && loginField.size() == 1);
 	            assertTrue("Password field should be found on the page but it wasn't", passwordField != null && passwordField.size() == 1);
 
-	            
+	            // fill connection form with user data and submit the form at the end - always using CSS selectors
 	            browser.fill("#login").with("bartosz2");
 	            browser.fill("#password").with("bartosz2");
 	            browser.submit("#loginForm");
